@@ -12,14 +12,31 @@
 }
 
 body {
-  margin: 0;
+  min-height: 100vh;
+  margin: 0 1em;
   font-family: system-ui, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
+  display: flex;
 }
 
-h1 {
-  text-align: center;
+.password-generator {
+  margin: auto;
+  border-radius: var(--border-radius);
+  display: grid;
+  gap: 2em;
+  width: 100%;
+  max-width: 26rem;
+  margin: auto;
+  padding: 2em;
+  background-color: hsl(var(--h-color), 50%, 20%);
+}
+
+.range-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
 }
 
 label {
@@ -38,7 +55,10 @@ button {
   border-radius: var(--border-radius);
 }
 
-input[type="range"]{padding-inline:0}
+input[type='range'] {
+  flex: 1;
+  padding-inline: 0;
+}
 
 input {
   font-family: serif;
@@ -49,14 +69,11 @@ button {
   font-weight: 600;
   background-color: var(--secondary-color);
   color: white;
+  cursor: pointer;
+  transition: opacity 0.2s, scale 0.15s;
 }
 
-.password-generator {
-  border-radius: var(--border-radius);
-  display: grid;
-  gap: 1em;
-  max-width: 22rem;
-  margin: auto;
-  padding: 2em;
-  background-color: hsl(var(--h-color), 50%, 20%);
+button:hover {
+  opacity: 0.85;
+  scale: 0.975;
 }
