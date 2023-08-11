@@ -1,0 +1,62 @@
+:root {
+  --h-color: 240;
+  --h2-color: 20;
+  --bg-color: hsl(var(--h-color), 50%, 8%);
+  --text-color: hsl(var(--h-color), 50%, 90%);
+  --secondary-color: hsl(var(--h2-color), 90%, 50%);
+  --border-radius: 0.25em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+h1 {
+  text-align: center;
+}
+
+label {
+  text-align: center;
+  font-weight: 600;
+}
+
+input,
+button {
+  padding: 0.5em 1em;
+  border: none;
+  outline: none;
+  font: inherit;
+  text-align: center;
+  accent-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+}
+
+input[type="range"]{padding-inline:0}
+
+input {
+  font-family: serif;
+}
+
+button {
+  text-transform: uppercase;
+  font-weight: 600;
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.password-generator {
+  border-radius: var(--border-radius);
+  display: grid;
+  gap: 1em;
+  max-width: 22rem;
+  margin: auto;
+  padding: 2em;
+  background-color: hsl(var(--h-color), 50%, 20%);
+}
