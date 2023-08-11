@@ -88,6 +88,11 @@ const PASSWORD_ARRAY = [
   '#'
 ]
 
+span.innerHTML =
+  (Number(range.getAttribute('max')) +
+    Number(range.getAttribute('min'))) /
+  2
+
 const obtenerLogitud = (e) => {
   span.innerHTML = e.target.value
   return e.target.value
