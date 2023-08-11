@@ -12,11 +12,15 @@
 }
 
 body {
-  min-height: 100vh;
   margin: 0 1em;
   font-family: system-ui, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
+}
+
+.password-container {
+  min-height: 100vh;
+  margin: 0 1em;
   display: flex;
 }
 

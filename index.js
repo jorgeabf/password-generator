@@ -4,7 +4,7 @@ const range = document.getElementById('password-range')
 const button = document.getElementById('password-btn')
 
 const PASSWORD_ARRAY = [
-  'a',
+  'a', //1
   'b',
   'c',
   'd',
@@ -14,7 +14,7 @@ const PASSWORD_ARRAY = [
   'h',
   'i',
   'j',
-  'k',
+  'k', //11
   'l',
   'm',
   'n',
@@ -24,7 +24,7 @@ const PASSWORD_ARRAY = [
   'r',
   's',
   't',
-  'u',
+  'u', //21
   'v',
   'w',
   'x',
@@ -34,7 +34,7 @@ const PASSWORD_ARRAY = [
   'B',
   'C',
   'D',
-  'E',
+  'E', //31
   'F',
   'G',
   'H',
@@ -44,7 +44,7 @@ const PASSWORD_ARRAY = [
   'L',
   'M',
   'N',
-  'O',
+  'O', //41
   'P',
   'Q',
   'R',
@@ -54,7 +54,7 @@ const PASSWORD_ARRAY = [
   'V',
   'W',
   'X',
-  'Y',
+  'Y', //51
   'Z',
   '0',
   '1',
@@ -64,33 +64,28 @@ const PASSWORD_ARRAY = [
   '5',
   '6',
   '7',
-  '8',
+  '8', //61
   '9',
   '+',
   '-',
   '.',
   ',',
   '!',
-  '¡',
-  '"',
   ':',
-  ';',
+  ';', //71
   '@',
   '·',
   '$',
   '%',
-  '%',
   '&',
-  '/',
   '(',
   ')',
-  '=',
   '?',
   '{',
   '}',
   '[',
   ']',
-  '#',
+  '#'
 ]
 
 const obtenerLogitud = (e) => {
@@ -103,7 +98,7 @@ const generarContrasena = (e) => {
 
   const generarNumeroAleatorio = () => {
     let numeroAleatorio = Math.floor(
-      Math.random() * (PASSWORD_ARRAY.length + 1) - 1
+      Math.random() * PASSWORD_ARRAY.length
     )
 
     return numeroAleatorio
@@ -113,6 +108,7 @@ const generarContrasena = (e) => {
 
   for (let i = 0; i < span.innerHTML; i++) {
     let aleatorio = generarNumeroAleatorio()
+    console.log(aleatorio)
     password += PASSWORD_ARRAY[aleatorio]
   }
 
@@ -121,3 +117,5 @@ const generarContrasena = (e) => {
 
 range.addEventListener('input', obtenerLogitud)
 button.addEventListener('click', generarContrasena)
+
+console.log(PASSWORD_ARRAY.length)
