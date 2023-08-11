@@ -3,7 +3,7 @@
   --h2-color: 20;
   --bg-color: hsl(var(--h-color), 50%, 8%);
   --text-color: hsl(var(--h-color), 50%, 90%);
-  --secondary-color: hsl(var(--h2-color), 90%, 50%);
+  --secondary-color: hsl(var(--h2-color), 100%, 40%);
   --border-radius: 0.25em;
   accent-color: var(--secondary-color);
 }
