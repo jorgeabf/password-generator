@@ -108,7 +108,6 @@ const generarContrasena = (e) => {
 
   for (let i = 0; i < span.innerHTML; i++) {
     let aleatorio = generarNumeroAleatorio()
-    console.log(aleatorio)
     password += PASSWORD_ARRAY[aleatorio]
   }
 
@@ -117,5 +116,3 @@ const generarContrasena = (e) => {
 
 range.addEventListener('input', obtenerLogitud)
 button.addEventListener('click', generarContrasena)
-
-console.log(PASSWORD_ARRAY.length)
