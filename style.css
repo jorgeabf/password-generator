@@ -5,6 +5,7 @@
   --text-color: hsl(var(--h-color), 50%, 90%);
   --secondary-color: hsl(var(--h2-color), 90%, 50%);
   --border-radius: 0.25em;
+  accent-color: var(--secondary-color);
 }
 
 * {
@@ -56,7 +57,6 @@ button {
   outline: none;
   font: inherit;
   text-align: center;
-  accent-color: var(--secondary-color);
   border-radius: var(--border-radius);
 }
 
