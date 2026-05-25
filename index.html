@@ -1,26 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-   <title>Password Generator</title>
+   <meta name="description" content="Generador de contraseñas seguras en tu navegador.">
+   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+   <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+   <title>Generador de contraseñas</title>
    <link rel="stylesheet" href="style.css">
    <script defer src="index.js"></script>
 </head>
 
 <body>
-   <div class="password-container">
+   <main class="password-container">
       <form class="password-generator">
-         <div class="range-group">
-            <label for="password-input">Nº: <span id="password-span"></span></label>
-            <input type="range" id="password-range" min="4" max="20" step="1">
+         <header class="brand">
+            <img class="brand__logo" src="logo.svg" alt="" width="48" height="48">
+            <h1 class="brand__title">Generador de contraseñas</h1>
+         </header>
+
+         <div class="output">
+            <input id="password-output" placeholder="Tu contraseña" readonly
+               spellcheck="false" autocomplete="off">
+            <button type="button" id="copy-btn" class="copy-btn" data-state="idle"
+               aria-label="Copiar contraseña">
+               <span class="copy-btn__icon copy-btn__icon--copy" aria-hidden="true">⧉</span>
+               <span class="copy-btn__icon copy-btn__icon--done" aria-hidden="true">✓</span>
+            </button>
          </div>
-         <button id="password-btn">Generar contraseña</button>
-         <input name="" id="password-input" placeholder="Su contraseña" readonly>
+
+         <div class="strength" aria-live="polite">
+            <div id="strength-bar" class="strength__bar" data-level="empty"></div>
+            <span id="strength-label" class="strength__label">—</span>
+         </div>
+
+         <div class="range-group">
+            <label for="password-range">Longitud: <span id="password-length"></span></label>
+            <input type="range" id="password-range" min="4" max="32" step="1" value="16">
+         </div>
+
+         <fieldset class="options">
+            <legend class="visually-hidden">Tipos de carácter</legend>
+            <label class="option">
+               <input type="checkbox" data-charset="lowercase" checked>
+               <span>Minúsculas</span>
+            </label>
+            <label class="option">
+               <input type="checkbox" data-charset="uppercase" checked>
+               <span>Mayúsculas</span>
+            </label>
+            <label class="option">
+               <input type="checkbox" data-charset="numbers" checked>
+               <span>Números</span>
+            </label>
+            <label class="option">
+               <input type="checkbox" data-charset="symbols" checked>
+               <span>Símbolos</span>
+            </label>
+         </fieldset>
+
+         <button type="button" id="generate-btn" class="generate-btn">Generar contraseña</button>
       </form>
-   </div>
+   </main>
 </body>
 
 </html>

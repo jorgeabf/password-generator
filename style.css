@@ -1,11 +1,33 @@
 :root {
+  /* Matices base del tema */
   --h-color: 240;
   --h2-color: 20;
-  --bg-color: hsl(var(--h-color), 50%, 8%);
-  --text-color: hsl(var(--h-color), 50%, 90%);
-  --secondary-color: hsl(var(--h2-color), 100%, 40%);
-  --border-radius: 0.25em;
+
+  /* Color — azul pizarra de baja saturación para un fondo sobrio */
+  --bg-color: hsl(var(--h-color) 22% 9%);
+  --surface-color: hsl(var(--h-color) 16% 15%);
+  --surface-color-2: hsl(var(--h-color) 14% 22%);
+  --text-color: hsl(var(--h-color) 15% 92%);
+  --text-muted: hsl(var(--h-color) 10% 64%);
+  /* 40% de luminosidad → blanco encima alcanza contraste AA (≈4.7:1) */
+  --secondary-color: hsl(var(--h2-color) 100% 40%);
+
+  /* Estados de fuerza */
+  --weak-color: hsl(0 80% 55%);
+  --good-color: hsl(45 95% 50%);
+  --strong-color: hsl(140 65% 45%);
+
+  /* Espaciado */
+  --space-xs: 0.5em;
+  --space-sm: 0.75em;
+  --space-md: 1em;
+  --space-lg: 2em;
+
+  /* Forma */
+  --border-radius: 0.4em;
+
   accent-color: var(--secondary-color);
+  color-scheme: dark;
 }
 
 * {
@@ -13,7 +35,7 @@
 }
 
 body {
-  margin: 0 1em;
+  margin: 0;
   font-family: system-ui, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -21,43 +43,117 @@ body {
 
 .password-container {
   min-height: 100vh;
-  margin: 0 1em;
   display: flex;
+  padding: var(--space-md);
 }
 
 .password-generator {
   margin: auto;
-  border-radius: var(--border-radius);
   display: grid;
-  gap: 2em;
+  gap: var(--space-lg);
   width: 100%;
   max-width: 26rem;
-  margin: auto;
-  padding: 2em;
-  background-color: hsl(var(--h-color), 50%, 20%);
+  padding: var(--space-lg);
+  border-radius: var(--border-radius);
+  background-color: var(--surface-color);
 }
 
+/* Marca */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  justify-content: center;
+  text-align: center;
+}
+
+.brand__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Salida + copiar */
+.output {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+#password-output {
+  flex: 1;
+  min-width: 0;
+  font-family: 'Fira Code', ui-monospace, monospace;
+  word-break: break-all;
+}
+
+.copy-btn {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 3em;
+  font-size: 1.1rem;
+}
+
+/* Mostramos un icono u otro según el estado de copiado */
+.copy-btn__icon {
+  grid-area: 1 / 1;
+}
+
+.copy-btn__icon--done {
+  color: var(--strong-color);
+}
+
+.copy-btn[data-state='idle'] .copy-btn__icon--done,
+.copy-btn[data-state='copied'] .copy-btn__icon--copy {
+  display: none;
+}
+
+/* Indicador de fuerza */
+.strength {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.strength__bar {
+  flex: 1;
+  height: 0.4em;
+  border-radius: var(--border-radius);
+  background-color: var(--surface-color-2);
+  overflow: hidden;
+  position: relative;
+}
+
+.strength__bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transition: width 0.25s, background-color 0.25s;
+}
+
+.strength__bar[data-level='empty']::after { width: 0; }
+.strength__bar[data-level='weak']::after { width: 33%; background-color: var(--weak-color); }
+.strength__bar[data-level='good']::after { width: 66%; background-color: var(--good-color); }
+.strength__bar[data-level='strong']::after { width: 100%; background-color: var(--strong-color); }
+
+.strength__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 4ch;
+}
+
+/* Longitud */
 .range-group {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1em;
+  gap: var(--space-md);
 }
 
 label {
-  text-transform: uppercase;
-  text-align: center;
   font-weight: 600;
-}
-
-input,
-button {
-  padding: 0.5em 1em;
-  border: none;
-  outline: none;
-  font: inherit;
-  text-align: center;
-  border-radius: var(--border-radius);
 }
 
 input[type='range'] {
@@ -65,13 +161,47 @@ input[type='range'] {
   padding-inline: 0;
 }
 
-input {
-  font-family: 'Fira Code', console;
+/* Opciones de tipos */
+.options {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.option input {
+  width: 1.1em;
+  height: 1.1em;
+  cursor: pointer;
+}
+
+/* Campos e inputs */
+input:not([type='range']):not([type='checkbox']),
+button {
+  padding: var(--space-xs) var(--space-md);
+  border: none;
+  outline: none;
+  font: inherit;
+  text-align: center;
+  border-radius: var(--border-radius);
+}
+
+input:not([type='range']):not([type='checkbox']) {
+  background-color: var(--surface-color-2);
+  color: var(--text-color);
 }
 
 button {
-  text-transform: uppercase;
-  font-weight: 600;
   background-color: var(--secondary-color);
   color: white;
   cursor: pointer;
@@ -80,5 +210,34 @@ button {
 
 button:hover {
   opacity: 0.85;
-  scale: 0.975;
+  scale: 0.985;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  scale: 1;
+}
+
+.generate-btn {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Foco visible accesible */
+:focus-visible {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
